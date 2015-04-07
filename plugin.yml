@@ -1,0 +1,10 @@
+###############################################
+#             Made By Polarcraft              #
+###############################################
+name: YGChat
+main: net.jc.minecraft.Main
+version: 4.5.15
+depend: [Vault]
+commands:
+  ygreload:
+    description: Allows you to reload the config.yml!
