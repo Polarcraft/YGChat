@@ -1,0 +1,44 @@
+###############################################
+#             Made By Polarcraft              #
+###############################################
+#
+#
+###############################################
+#              Chat formatting                #
+###############################################
+#
+# This section is for the chat formatting! 
+# What you can do to replace stuff 
+# %prefix = Player prefix 
+# %player = Player 
+# %message = the message 
+chat-format: '%prefix %player&c&l: &f%message'
+#
+# This will be shown if you have no prefix 
+# Also if you leave this blank then you will have a space before your name 
+#no-prefix: '&7[No Prefix]'
+#
+###############################################
+#               Tab Formatting                #
+###############################################
+#
+# This section is the tab section 
+# hit the tab button to see this 
+# What you can do to replace stuff 
+# %prefix = Player prefix 
+# %player = Player 
+PlayerList: '%prefix %player'
+#
+###############################################
+#               Player Messages               #
+###############################################
+#
+# This section is for the join/leave messages!
+# What you can do to replace stuff
+# %prefix = Player prefix
+# %player = Player
+join-message: '%prefix %player has joined the server!'
+quit-message: '%prefix %player has left the server!'
+#
+#
+# end of file
