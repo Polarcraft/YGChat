@@ -1,0 +1,42 @@
+package net.yougold.org.YGChat;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+public class ChatPrefix implements Listener {
+	private Main plugin;
+
+	public ChatPrefix(Main plugin) {
+		this.plugin = plugin;
+	}
+	
+	@EventHandler(priority=EventPriority.NORMAL)
+	public void onPLayerChatEvent(AsyncPlayerChatEvent e) { 
+		Player p = e.getPlayer();
+		if(p.hasMetadata("muted")) {
+			e.setCancelled(true);
+			e.setMessage("");
+			p.sendMessage("You are not allowed to chat!");
+		} else if(!p.hasMetadata("muted")) {
+            String message = e.getMessage();
+            e.setCancelled(true);
+    		e.setMessage("");
+            String prefix = ChatColor.translateAlternateColorCodes('&', Main.chat.getPlayerPrefix(p));
+            String suffix = ChatColor.translateAlternateColorCodes('&', Main.chat.getPlayerSuffix(p));
+            String display = ChatColor.translateAlternateColorCodes('&', p.getDisplayName().toString());
+            String chatformat = ChatColor.translateAlternateColorCodes('&', this.plugin.getConfig().getString("chat-format"));
+            if(!p.hasPermission("yg.chat.color")) {
+            	String ChatFormat = chatformat.replace("%player", display).replace("%message", message).replace("%prefix", prefix).replace("%suffix", suffix);
+                Bukkit.broadcastMessage(ChatFormat);
+            } else if(p.hasPermission("yg.chat.color")) {
+            	String ChatFormat = ChatColor.translateAlternateColorCodes('&', this.plugin.getConfig().getString("chat-format").replace("%player", p.getDisplayName().toString()).replace("%message", message.toString()).replace("%prefix", Main.chat.getPlayerPrefix(p)).replace("suffix", Main.chat.getPlayerSuffix(p)));
+                Bukkit.broadcastMessage(ChatFormat);
+            }            
+		}
+	}
+}
